@@ -1,0 +1,19 @@
+from models.models import Person
+
+In [3]: p = Person(first_name="Rahul", last_name="Beniwal", shirt_size="L")
+
+In [4]: p
+Out[4]: <Person: Person object (None)>
+
+In [5]: p.save()
+
+In [6]: p
+Out[6]: <Person: Person object (1)>
+
+In [7]: p.shirt_size
+Out[7]: 'L'
+
+In [8]: p.get_shirt_size_display()
+Out[8]: 'Large'
+
+In [9]:

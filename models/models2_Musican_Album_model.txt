@@ -1,0 +1,14 @@
+In [20]: from models.models import Album, Musician
+
+In [21]: from datetime import date
+
+In [22]: musician = Musician(first_name="Rahul", last_name="Beniwal", instrument="sax")
+
+In [23]: musician.save()
+
+In [24]: album = Album(artist=musician, name=musician.first_name,release_date=date.today(), num
+    ...: _stars=4, genre_type='Lethal')
+
+In [25]: album.save()
+
+In [26]: 
