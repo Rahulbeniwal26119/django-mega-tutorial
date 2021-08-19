@@ -1,0 +1,41 @@
+from models.models import Album, Musician, MemberShip
+
+from datetime import date
+
+ringo = Person.objects.create(first_name="Rahul", last_name="beniwal")
+
+paul = Person.objects.create(first_name="Kuldeep", last_name="Beniwal")
+
+beatles = Group.objects.create(name="Beatles")
+
+m1 = MemberShip(person=ringo, group=beatles, date_joined=date(1962, 8, 16),
+invite_reason="Need a drumer")
+
+beatles.members.all()
+Out: <QuerySet [<Person: Rahulbeniwal>]>
+
+MemberShip.objects.create(person=paul, group=beatles, date_joined=date(2020,1,1)
+    ,invite_reason="Manager")
+
+beatles.members.all()
+Out: <QuerySet [<Person: Rahulbeniwal>, <Person: KuldeepBeniwal>]>
+
+beatles.members.create(first_name="George", last_name=" Harrision", 
+    through_defaults={'date_joined' : date(1960, 8,1)})
+Out: <Person: George Harrision>
+
+beatles.members.set([paul], through_defaults={'date_joined' : date(2020, 1,1)})
+
+beatles.members.remove(paul)
+
+beatles.members.clear()  removes all the data 
+
+Group.objects.filter(members__first_name__startswith = "R")
+Out: <QuerySet [<Group: Beatles>]>
+
+Person.objects.filter(group__name="Beatles")
+Out: <QuerySet [<Person: RahulBeniwal>]>
+
+Person.objects.filter(group__name="Beatles", membership__date_joined__lt = date(
+     1961,1,1))
+Out: <QuerySet [<Person: RahulBeniwal>]>
