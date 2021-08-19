@@ -1,0 +1,4 @@
+**/migrations/**
+__pychache__/
+*$py.class
+*.pyc
