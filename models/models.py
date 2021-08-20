@@ -41,7 +41,7 @@ class Manufacturer(models.Model):
     def __str__(self):
         return self.name
 
-# Foreign Key is used to setup many to one relation ship 
+# Foreign Key is used to setup many to one relation ship
 class Car(models.Model):
     name = models.CharField(max_length=100, default="Xeon")
     Manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, verbose_name="Manuacturer name")
@@ -61,7 +61,7 @@ class MemberShip(models.Model):
     invite_reason = models.CharField(max_length=64)
 
 
-# One to One Relation 
+# One to One Relation
 
 class Place(models.Model):
     name = models.CharField(max_length=50)
@@ -70,19 +70,65 @@ class Place(models.Model):
     def __str__(self):
         return f"{self.address} the place"
 
-class Restaurtant(models.Model):
+class Restaurant(models.Model):
     place = models.OneToOneField(Place, on_delete=models.CASCADE, primary_key=True)
-    servers_hot_dogs = models.BooleanField(default=False)
-    servers_pizza = models.BooleanField(default=False)
+    serves_hot_dogs = models.BooleanField(default=False)
+    serves_pizza = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.place.name}"
 
+# model field name cannot be a keyword
+# field name cannot have more than single consequtive '_'
 class Waiter(models.Model):
-    restaurtant = models.ForeignKey(Restaurtant, on_delete=models.CASCADE)
+    Restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"{self.name} the waiter at {self.restaurtant}"
+        return f"{self.name} the waiter at {self.Restaurant}"
 
+class Ox(models.Model):
+    horn_length = models.IntegerField()
+
+    class Meta:
+        ordering = ["horn_length"]
+        verbose_name_plural = "oxen"
+
+
+# Custom Model Methods
+
+class Human(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    birth_date = models.DateField()
+
+    def baby_boomer_status(self):
+        import datetime 
+        if self.birth_date < datetime.date(195, 8, 1):
+            return "Pre-Boomer"
+        elif self.birth_date < datetime.date(1965,1,1):
+            return "Baby Boomer"
+        else:
+            return "Post Boomer"
+
+    @property
+    def full_name(self):
+        "returns the persons full name"
+        return f"{self.first_name}  {self.last_name}"
+
+    def __str__(self):
+        return f"{self.first_name}  {self.last_name}"
+    
+    def save(self, *args, **kwargs):
+        if str( self.first_name) == 'Rahul':
+            super().save(*args, **kwargs)  # class the actual save method
+        else:
+            print(" Unable to save")
+
+    def delete(self, *args, **kwargs):
+        print(" It will surely delete")
+        super().delete(*args, **kwargs)
+        print("SuccessFully Deleted")
+    
+# Model Inheritence
 
