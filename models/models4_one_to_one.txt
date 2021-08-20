@@ -1,0 +1,104 @@
+In: from models.models import Restaurant, Place, Waiter
+
+In: type(Place.objects.all()[0])
+Out: models.models.Place
+
+In: p1 = Place.objects.all()[0]
+
+In: p2 = Place.objects.all()[1]
+
+In: r = Restaurant(place=p1, serves_hot_dogs=True, serves_pizza=False)
+
+In: r.save()
+
+In : r.place
+Out: < Place: 944 W. Fullerton the place >
+
+In : r.place
+Out: <Place: 944 W. Fullerton the place>
+
+In : r.place.name
+Out: 'Demon Dogs'
+
+In : r.place.address
+Out: '944 W. Fullerton'
+
+In : p1
+Out: <Place: 944 W. Fullerton the place>
+
+In : p1.restaurant
+Out: <Restaurant: Demon Dogs>
+
+In : hasattr(p1, 'restaurant')
+Out: True
+
+In : hasattr(p2, 'restaurant')
+Out: False
+
+In : r.place = p2
+
+In : r.save()
+
+In : p2.restaurant
+Out: <Restaurant: Ace Hardwar>
+
+In : r
+Out: <Restaurant: Ace Hardwar>
+
+In : r.place
+Out: <Place: 1013 N. Ashland the place>
+
+In : r
+Out: <Restaurant: Demon Dogs>
+
+In : Restaurant.objects.all()
+Out: <QuerySet [<Restaurant: Demon Dogs>, <Restaurant: Ace Hardwar>]>
+
+In : Place.objects.order_by("name")
+Out: <QuerySet [<Place: 1013 N. Ashland the place>, <Place: 944 W. Fullerton the place>]>
+
+In : Restaurant.objects.get(place__pk = 1)
+Out: <Restaurant: Demon Dogs>
+
+In : Restaurant.objects.filter(place__pk = 1)
+Out: <QuerySet [<Restaurant: Demon Dogs>]>
+
+In : Restaurant.objects.get(place__pk = 1)
+Out: <Restaurant: Demon Dogs>
+
+In : Restaurant.objects.filter(place__name__startswith='Demon')
+Out: <QuerySet [<Restaurant: Demon Dogs>]>
+
+In : Restaurant.objects.filter(place__name__contains='Ashland')
+Out: <QuerySet >
+
+In : p1
+Out: <Place: 944 W. Fullerton the place>
+
+In : p2
+Out: <Place: 1013 N. Ashland the place>
+
+In : Restaurant.objects.filter(place__address__contains='Ashland')
+Out: <QuerySet [<Restaurant: Ace Hardwar>]>
+
+In : Place.objects.get(pk=1)
+Out: <Place: 944 W. Fullerton the place>
+
+In : Place.objects.get(restaurant__place=p1)
+Out: <Place: 944 W. Fullerton the place>
+
+In : Place.objects.get(restaurant = r)
+Out: <Place: 944 W. Fullerton the place>
+
+In : Place.objects.get(restaurant__place__name__startswith = "Demon")
+Out: <Place: 944 W. Fullerton the place>
+
+In : w = r.waiter_set.create(name="Joe")
+
+In : w2 = Waiter.objects.create(Restaurant=r, name="Nope")
+
+In : w2
+Out: <Waiter: Nope the waiter at Demon Dogs>
+
+In : Waiter.objects.filter(Restaurant=r)
+Out: <QuerySet [<Waiter: Joe the waiter at Demon Dogs>, <Waiter: Nope the waiter at Demon Dogs>]>

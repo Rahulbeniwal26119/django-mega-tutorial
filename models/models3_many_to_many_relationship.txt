@@ -39,3 +39,20 @@ Out: <QuerySet [<Person: RahulBeniwal>]>
 Person.objects.filter(group__name="Beatles", membership__date_joined__lt = date(
      1961,1,1))
 Out: <QuerySet [<Person: RahulBeniwal>]>
+
+In : paul = beatles.members.create(first_name="Paul", last_name="B", through_defaults
+ ={'date_joined' : date(2020,1,1)}
+ )
+
+In : paul
+Out: <Person: PaulB>
+
+In : paul_membership = MemberShip.objects.get( group = beatles, person=paul)
+
+In : type(paul_membership)
+Out: models.models.MemberShip
+
+In : paul_membership.date_joined
+Out: datetime.date(2020, 1, 1)
+
+In : paul_membership.invite_reason
