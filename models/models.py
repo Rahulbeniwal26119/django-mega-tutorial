@@ -103,7 +103,7 @@ class Human(models.Model):
     birth_date = models.DateField()
 
     def baby_boomer_status(self):
-        import datetime 
+        import datetime
         if self.birth_date < datetime.date(195, 8, 1):
             return "Pre-Boomer"
         elif self.birth_date < datetime.date(1965,1,1):
@@ -118,7 +118,7 @@ class Human(models.Model):
 
     def __str__(self):
         return f"{self.first_name}  {self.last_name}"
-    
+
     def save(self, *args, **kwargs):
         if str( self.first_name) == 'Rahul':
             super().save(*args, **kwargs)  # class the actual save method
@@ -129,6 +129,53 @@ class Human(models.Model):
         print(" It will surely delete")
         super().delete(*args, **kwargs)
         print("SuccessFully Deleted")
-    
-# Model Inheritence
 
+# Model Inheritence
+# abstract base class Inheritance
+
+class CommonInfo(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+
+    class Meta:
+        ordering = ['name']
+
+
+# incase of multiple inheritence default for meta inheritance is the first class
+class Unmanaged(models.Model):
+    class Meta:
+        abstract = True
+        managed = False # django will not manage it like creating and modifying it
+
+class Student(CommonInfo, Unmanaged):
+    home_group = models.CharField(max_length=5)
+
+    class Meta(Unmanaged.Meta):
+        pass
+        #db_table = 'student_info' # override the default scheme for naming tables
+
+# related_name and realted_query_name
+class Base(models.Model):
+    m2m  =  models.ManyToManyField(
+        CommonInfo,
+        through="Medium",
+        related_name="%(app_label)s_%(class)s_related",
+        related_query_name = "%(app_label)s_%(class)ss",
+    )
+
+    class Meta:
+        abstract = True
+
+class ChildA(Base):
+    pass
+
+class ChildB(Base):
+    pass
+
+
+class Medium(models.Model):
+    common_info = models.ForeignKey(CommonInfo, on_delete=models.CASCADE)
+    childA = models.ForeignKey(ChildA, on_delete=models.CASCADE)
+    childB = models.ForeignKey(ChildB, on_delete=models.CASCADE)
+
+# Multi Table Inheritance
