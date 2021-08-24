@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "models",
-    "decorators"
+    "decorators",
+    "polls"
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,10 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+#  Database change made from here
+# django.db.backends.postgresql
+#  USER, PASSWORD, and HOST must be added for other dbs
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -124,4 +129,4 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # scheme for automatically generating primary key  
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # scheme for automatically generating primary key
