@@ -179,3 +179,70 @@ class Medium(models.Model):
     childB = models.ForeignKey(ChildB, on_delete=models.CASCADE)
 
 # Multi Table Inheritance
+class Places(models.Model):
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=80)
+
+class Restaurants(Places):
+    servers_hot_dogs = models.BooleanField(default=False)
+    servers_pizza = models.BooleanField(default=True)
+
+class Supplier(Place):
+    customers = models.ManyToManyField(Place, related_name='provider')
+
+# proxy model inheritance
+# unmanaged vs proxy
+# important but lagging is how to create customer Manager
+class NewManager(models.Manager):
+    pass
+
+class ProxyPerson(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+
+class ProxyMyPerson(ProxyPerson):
+    objects = NewManager()
+    class Meta:
+        ordering = ["last_name"]
+        proxy = True
+
+    def do_something(self):
+        pass
+
+# Multiple Inheritance
+# use different primary key to abstain from conflict
+class Article(models.Model):
+    article_id = models.AutoField(primary_key=True)
+
+class Book(models.Model):
+    book_id = models.AutoField(primary_key=True)
+
+class BookArticle(Book, Article):
+    pass
+
+# Alternate way to abstain from conflict make
+# use a common ancestor to hold the AutoField
+# hiding is only allowed in inheritance from Abstract Class
+class Piece(models.Model):
+    pass
+
+class Article2(Piece):
+    article_piece = models.OneToOneField(Piece, on_delete=models.CASCADE, parent_link=True)
+
+class Book2(Piece):
+    book_piece = models.OneToOneField(Piece, on_delete=models.CASCADE, parent_link=True)
+
+class BookReview(Article2, Book2):
+    pass
+
+class Reporter(models.Model):
+    full_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.full_name
+
+class NewsArticle(models.Model):
+    reporter = models.ForeignKey(Reporter, on_delete=models.CASCADE)
+    headline = models.CharField(max_length=100)
+    content = models.TextField()
+
