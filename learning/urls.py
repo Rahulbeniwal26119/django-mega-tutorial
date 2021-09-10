@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("decorators.urls")),
-    path('polls/', include("polls.urls"))
+    path('decorators/', include("decorators.urls")),
+    path('polls/', include("polls.urls")),
+    path("modelform/", include("modelform.urls")),
+    path('', lambda request : HttpResponse("This is my homepage"))
 ]

@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "models",
     "decorators",
-    "polls"
+    "polls.apps.PollsConfig",
+    "django_extensions",
+    "modelform",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [

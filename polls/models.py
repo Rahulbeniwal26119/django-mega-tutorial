@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+import datetime
 
 # Create your models here.
 class Question(models.Model):
@@ -12,6 +14,13 @@ class Question(models.Model):
         if len(self.question_text) > 0:
             super().save(*args, **kwargs)
 
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+    def is_not_valid(self):
+        return self.question_text == ''
+
     @property
     def question(self):
         return self.question_text
@@ -22,10 +31,14 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
-        if self.choice_text in ['a', 'b', 'c', 'd']:
-            super().save(*args, **kwargs)
-            print(f"You choose {self.choice_text}")
+        #if self.choice_text in ['a', 'b', 'c', 'd']:
+        super().save(*args, **kwargs)
+        #print(f"You choose {self.choice_text}")
 
     @property
     def answer(self):
         return self.choice_text
+
+    def __str__(self):
+        return self.choice_text
+

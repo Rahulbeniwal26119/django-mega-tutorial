@@ -1,5 +1,9 @@
 **/migrations/**
+.idea/
 learning/__pycache__/
 *$py.class
 *.pyc
 venv/
+.ipynb_checkpoints/
+Untitled.ipynb
+temp.py
