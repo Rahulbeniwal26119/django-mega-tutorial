@@ -1,0 +1,10 @@
+li a{
+    color : green;
+}
+
+body{
+    background: url("images/Scene.jpeg") no-repeat;
+    background-size : cover;
+    height : 100%;
+    width : 100%;
+}
