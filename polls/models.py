@@ -23,6 +23,7 @@ class Question(models.Model):
 
     @property
     def question(self):
+
         return self.question_text
 
 class Choice(models.Model):
