@@ -3,12 +3,15 @@
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+import simplejson as json
 # from django.http import Http404
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
-
+from rest_framework.decorators import api_view 
+from rest_framework import status
 from .models import Question, Choice
+from shared.request_utils import log_and_respond
 
 
 # Create your views here.
@@ -83,3 +86,14 @@ def vote(request, question_id):
         print(selected_choice.votes)
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+@api_view(['GET'])
+def custom_view(request):
+    print(request.GET)
+    print(request.data)
+    return log_and_respond(
+        data = {"message": "Hello World"},
+        status = status.HTTP_200_OK,
+        message="succeefully done",
+        message_code = "200"
+    )

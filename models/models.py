@@ -1,5 +1,6 @@
 from django.db import models
-from django.utils.translation import LANGUAGE_SESSION_KEY
+
+LANGUAGE_SESSION_KEY = '_language'
 
 # Create your models here.
 
