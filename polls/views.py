@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 # from django.template import loader
-
+from django.views.decorators.http import require_http_methods
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 import simplejson as json
@@ -89,8 +89,11 @@ def vote(request, question_id):
 
 @api_view(['GET'])
 def custom_view(request):
-    print(request.GET)
-    print(request.data)
+
+    print("get -> ", request.GET)
+    print("data -> ", request.data)
+    params = request.GET.get('params')
+    print(params)
     return log_and_respond(
         data = {"message": "Hello World"},
         status = status.HTTP_200_OK,
