@@ -84,9 +84,18 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 # django.db.backends.postgresql
 #  USER, PASSWORD, and HOST must be added for other dbs
 DATABASES = {
-    'default': {
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+
+    'default' : {
+        'ENGINE' : 'django.db.backends.postgresql',
+        'NAME' : 'django',
+        'USER' : 'postgres',
+        'PASSWORD' : 'rahul111',
+        'HOST' : 'localhost',
+        'PORT' : '5432'
     }
 }
 

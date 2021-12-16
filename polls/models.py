@@ -51,3 +51,24 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
+
+class Marks(models.Model):
+    name = models.CharField(max_length=200)
+    english = models.IntegerField()
+    maths = models.FloatField()
+    science = models.FloatField()
+
+    class Meta:
+        db_table = "marks"
+        verbose_name = "Marks"
+
+# annotate in django 
+# In [18]: Marks.objects.all().values('name').distinct('name').annotate(total_marks=F('en
+    #    1 glish') + F('maths')+ F('science'))
+# Out[18]: <QuerySet [{'name': 'Kuldeep', 'total_marks': 160.0}, {'name': 'Rahul', 'total_marks': 300.0}]>
+# aggregate in django
+# In [22]: Marks.objects.all().values('name').aggregate(Sum('english')).get('english__sum
+    #    1 ')
+# Out[22]: 123
+# annotate applies on a tuple
+# aggregate applies on a single value or cols
