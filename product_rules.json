@@ -1,0 +1,15 @@
+{
+    "AUTHOR" : "RAHUL",
+    "values" : [
+        "1", "2", "3"
+    ],
+    "1" : {
+        "DAYS_IN_MONTH" : 30
+    },
+    "EXTERNAL" : {
+        "INTERNAL" : {
+            "LEVEL" : 1
+        }
+    }
+
+}
