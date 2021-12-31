@@ -37,3 +37,28 @@ class AuthToken(models.Model):
         db_table = 'auth_token'
         verbose_name = 'Auth Token'
         verbose_name_plural = 'Auth Tokens'
+
+# Prefetch related and selected related 
+class Province(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name 
+
+
+class City(models.Model):
+    name = models.CharField(max_length=50)
+    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    def __unicode__(self):
+        return self.name 
+
+
+class Persons(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    hometown = models.ForeignKey(City, on_delete=models.CASCADE, related_name="birth")
+    visitation = models.ManyToManyField(City, related_name="visitors")
+    living = models.ForeignKey(City, on_delete=models.CASCADE,  related_name="citizen")
+
+    def __unicode__(self):
+        return self.first_name + " " + self.last_name

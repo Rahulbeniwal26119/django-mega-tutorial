@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     "polls.apps.PollsConfig",
     "django_extensions",
     "modelform",
-    "rest_framework"
+    "rest_framework",
+    # "debug_toolbar"
 ]
 
 MIDDLEWARE = [
+    # "debug_toolabar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -92,7 +94,7 @@ DATABASES = {
     'default' : {
         'ENGINE' : 'django.db.backends.postgresql',
         'NAME' : 'django',
-        'USER' : 'postgres',
+        'USER' : 'rahul',
         'PASSWORD' : 'rahul111',
         'HOST' : 'localhost',
         'PORT' : '5432'
@@ -127,6 +129,10 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
 
 USE_L10N = True
 

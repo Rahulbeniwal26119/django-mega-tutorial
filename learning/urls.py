@@ -21,5 +21,6 @@ urlpatterns = [
     path('decorators/', include("decorators.urls")),
     path('polls/', include("polls.urls")),
     path("modelform/", include("modelform.urls")),
-    path('', lambda request : HttpResponse("This is my homepage"))
+    path('', lambda request : HttpResponse("This is my homepage")),
+    # path('__debug__/', include('debug_toolbar.ulrs')),
 ]
