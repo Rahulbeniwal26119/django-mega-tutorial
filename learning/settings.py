@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "modelform",
     "rest_framework",
+    "custom_field"
     # "debug_toolbar"
 ]
 

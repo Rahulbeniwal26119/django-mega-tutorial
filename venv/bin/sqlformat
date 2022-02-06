@@ -1,4 +1,4 @@
-#!/home/rahul/project/django-mega-tutorial/venv/bin/python3
+#!/home/rahul/projects/django-mega-tutorial/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
