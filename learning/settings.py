@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     "django_extensions",
     "modelform",
     "rest_framework",
-    "custom_field"
+    "custom_fields",
+    "rest_app",
+    "customuser"
     # "debug_toolbar"
 ]
 
@@ -149,3 +151,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # scheme for automatically generating primary key
+AUTH_USER_MODEL = "customuser.CustomUser"

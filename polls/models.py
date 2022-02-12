@@ -15,12 +15,12 @@ class Question(models.Model):
         if len(self.question_text) > 0:
             super().save(*args, **kwargs)
 
-    # order the item according pub_date
-    @admin.display(
-        boolean = True,
-        ordering = "pub_date",
-        description = "Published Recently?"
-    )
+    # # order the item according pub_date
+    # @admin.display(
+    #     boolean = True,
+    #     ordering = "pub_date",
+    #     description = "Published Recently?"
+    # )
 
     def was_published_recently(self):
         now = timezone.now()
