@@ -7,8 +7,8 @@ class CustomUser(AbstractUser):
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
-        # what the hack is this swappable here 
-        # it fixed the error with user change 
+        # what the hack is this swappable here
+        # it fixed the error with user change
         db_table = 'customuser_customuser'
 
 class TestUser(models.Model):
