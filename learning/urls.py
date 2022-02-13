@@ -22,6 +22,7 @@ urlpatterns = [
     path('polls/', include("polls.urls")),
     path("modelform/", include("modelform.urls")),
     path('', lambda request : HttpResponse("This is my homepage")),
-    path('rest/', include('rest_app.urls'))
+    path('rest/', include('rest_app.urls')),
+    path('encrypted/', include('encrypt.urls')),
     # path('__debug__/', include('debug_toolbar.ulrs')),
 ]

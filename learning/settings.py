@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "custom_fields",
     "rest_app",
-    "customuser"
+    "customuser",
+    "encrypt"
     # "debug_toolbar"
 ]
 
