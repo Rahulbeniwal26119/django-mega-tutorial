@@ -90,19 +90,19 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 # django.db.backends.postgresql
 #  USER, PASSWORD, and HOST must be added for other dbs
 DATABASES = {
-    'sqlite': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
 
-    'default' : {
-        'ENGINE' : 'django.db.backends.postgresql',
-        'NAME' : 'django',
-        'USER' : 'rahul',
-        'PASSWORD' : 'rahul111',
-        'HOST' : 'localhost',
-        'PORT' : '5432'
-    }
+    # 'default' : {
+    #     'ENGINE' : 'django.db.backends.postgresql',
+    #     'NAME' : 'django',
+    #     'USER' : 'rahul',
+    #     'PASSWORD' : 'rahul111',
+    #     'HOST' : 'localhost',
+    #     'PORT' : '5432'
+    # }
 }
 
 
@@ -153,3 +153,25 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # scheme for automatically generating primary key
 AUTH_USER_MODEL = "customuser.CustomUser"
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    }
+}
